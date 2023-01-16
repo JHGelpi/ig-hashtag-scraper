@@ -4,12 +4,17 @@
 import threading
 from instaloader import Instaloader, Profile
 # import engagement
-import pickle
+# import pickle
 import datetime
+from datetime import date
+from datetime import datetime
+import pandas as pd
 
 loader = Instaloader()
 NUM_POSTS = 10
-post_date = datetime.datetime.now()
+start_date = datetime(2022, 5, 1)
+end_date = datetime(2022, 5, 31, 23, 59, 59, 0)
+post_date = datetime.now()
 post_data = []
 post_vid_yn = False
 
@@ -18,20 +23,23 @@ def get_hashtags_posts(query):
     users = {}
     count = 0
     for post in posts:
-        profile = post.owner_profile
         post_date = post.date_utc
-        post_vid_yn = post.is_video
-        if profile.username not in users:
-            # summary = engagement.get_summary(profile)
-            # users[profile.username] = summary
-            count += 1
-            print('{}: {}, {}, {}'.format(count, profile.username, post_date, post_vid_yn))
-            if count == NUM_POSTS:
-                break
-    return users, post_date
+        if start_date <= post_date <= end_date:
+            post_vid_yn = post.is_video
+            profile = post.owner_profile
+            if profile.username not in users:
+                # summary = engagement.get_summary(profile)
+                # users[profile.username] = summary
+                count += 1
+                print('{}: {}, {}, {}'.format(count, profile.username, post_date, post_vid_yn))
+                #post_data[]
+                if count == NUM_POSTS:
+                    break
+    return users, post_date, post_vid_yn
 
 if __name__ == "__main__":
-    hashtag = "projecttikka"
+    # hashtag = "projecttikka"
+    hashtag = "selftapemay2022"
     users = get_hashtags_posts(hashtag)
     # post_data = get_hashtags_posts(hashtag)
     # print(users)
