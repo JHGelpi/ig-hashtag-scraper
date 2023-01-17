@@ -3,12 +3,16 @@
 
 import threading
 from instaloader import Instaloader, Profile
+import instaloader
 # import engagement
 # import pickle
 import datetime
 from datetime import date
 from datetime import datetime
 import pandas as pd
+
+# L = instaloader.Instaloader()
+# L.login('USERNAME', 'PASSWORD')
 
 loader = Instaloader()
 NUM_POSTS = 10
@@ -38,8 +42,8 @@ def get_hashtags_posts(query):
     return users, post_date, post_vid_yn
 
 if __name__ == "__main__":
-    # hashtag = "projecttikka"
-    hashtag = "selftapemay2022"
+    hashtag = "projecttikka"
+    # hashtag = "selftapemay2022"
     users = get_hashtags_posts(hashtag)
     # post_data = get_hashtags_posts(hashtag)
     # print(users)
